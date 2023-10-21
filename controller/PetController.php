@@ -21,7 +21,17 @@ if (isset($data["action"])) {
                 getPetBreeds($data['petType']);
             }
             break;
+        case "savePet":
+            if (isset($data['formData'])) {
+                savePet($data['formData']);
+            }
+            break;
     }
+}
+
+function savePet(array $formData)
+{
+    print_r($formData);
 }
 
 function getPetTypes()

@@ -59,13 +59,6 @@ export default {
         console.error('Error:', error)
       }
     },
-    async savePet(event) {
-      this.formData.push(event.target.elements.petName.value)
-      this.formData.push(event.target.elements.petAge.value)
-      this.formData.push(event.target.elements.petWeight.value)
-      this.formData.push(event.target.elements.petType.value)
-      console.log(this.formData)
-    },
     async getPetBreeds(event) {
       const petType = event.target.value
       try {
@@ -74,6 +67,26 @@ export default {
           petType: petType
         })
         this.petBreeds = response.data
+        // Log the error into the console
+      } catch (error) {
+        console.error('Error:', error)
+      }
+    },
+    async savePet(event) {
+      this.formData = []
+      this.formData.push(event.target.elements.petName.value)
+      this.formData.push(event.target.elements.petAge.value)
+      this.formData.push(event.target.elements.petWeight.value)
+      this.formData.push(event.target.elements.petType.value)
+      this.formData.push(event.target.elements.petBreed.value)
+
+      try {
+        const response = await axios.post('http://localhost/Petsola/controller/PetController.php', {
+          action: 'savePet',
+          formData: this.formData
+        })
+
+        console.log(response.data)
         // Log the error into the console
       } catch (error) {
         console.error('Error:', error)
