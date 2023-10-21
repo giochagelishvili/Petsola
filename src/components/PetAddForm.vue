@@ -14,7 +14,8 @@
     </div>
     <div>
       <label for="petType">Pet Type</label>
-      <select name="petType" id="petType" @change="getPetBreeds">
+      <select required name="petType" id="petType" @change="getPetBreeds">
+        <option selected disabled>Select</option>
         <option
           v-for="petType in petTypes"
           :value="petType.pet_type_name"
@@ -24,12 +25,10 @@
         </option>
       </select>
     </div>
-    <div>
+    <div v-if="petBreeds.length != 0">
       <label for="petBreed">Pet Breed</label>
-      <select name="petBreed" id="petBreed">
-        <option v-for="petBreed in petBreeds" :value="petBreed.breed" :key="petBreed.breed_id">
-          {{ petBreed.breed }}
-        </option>
+      <select required name="petBreed" id="petBreed">
+        <option v-for="petBreed in petBreeds" :key="petBreed.breed_id">{{ petBreed.breed }}</option>
       </select>
     </div>
   </form>

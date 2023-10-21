@@ -37,7 +37,7 @@ function getPetBreeds(string $petType)
     $table = "pet_breeds";
     $condition = "animal = '$petType'";
     $petBreeds = $db->fetchAll($table, $condition);
-    print_r($petBreeds);
+    echo json_encode($petBreeds);
 }
 
 function decodeData()
