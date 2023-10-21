@@ -2,7 +2,9 @@
   <h1>Pet List</h1>
 
   <div>
-    <ButtonComponent text="Add" />
+    <RouterLink to="petadd">
+      <ButtonComponent text="Add" />
+    </RouterLink>
     <ButtonComponent text="Delete" />
   </div>
 </template>

@@ -6,7 +6,7 @@
 }
 
 body {
-  padding: 20px;
+  padding: 30px;
 }
 
 header {
@@ -14,4 +14,9 @@ header {
   align-items: center;
   justify-content: space-between;
   width: 100%;
+
+  border-bottom: 1px solid black;
+
+  padding-inline: 20px;
+  padding-bottom: 20px;
 }
