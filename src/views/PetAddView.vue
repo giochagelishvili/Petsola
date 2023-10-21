@@ -1,14 +1,18 @@
 <template>
   <header>
-    <h1>Pet Add</h1>
+    <PetAddHeader />
   </header>
+  <main>
+    <PetAddForm />
+  </main>
 </template>
 
 <script>
-// import PetListHeader from '../components/PetListHeader.vue'
+import PetAddHeader from '../components/PetAddHeader.vue'
+import PetAddForm from '../components/PetAddForm.vue'
 
 export default {
-  name: 'PetAddView'
-  //   components: { PetListHeader }
+  name: 'PetAddView',
+  components: { PetAddHeader, PetAddForm }
 }
 </script>
