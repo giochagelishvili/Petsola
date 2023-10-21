@@ -24,3 +24,30 @@ export default {
   name: 'PetAddForm'
 }
 </script>
+
+<style scoped>
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 10px;
+}
+
+div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 300px;
+}
+
+label {
+  width: 100px;
+}
+
+input {
+  flex: 1;
+  padding-inline: 10px;
+  padding-block: 3.5px;
+}
+</style>
