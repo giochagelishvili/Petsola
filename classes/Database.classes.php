@@ -1,6 +1,6 @@
 <?php
 
-class Dbh
+class Database
 {
     private string $username;
     private string $password;

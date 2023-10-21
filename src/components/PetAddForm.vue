@@ -14,14 +14,46 @@
     </div>
     <div>
       <label for="petType">Pet Type</label>
-      <select name="petType" id="petType"></select>
+      <select name="petType" id="petType">
+        <option
+          v-for="petType in petTypes"
+          :value="petType.pet_type_name"
+          :key="petType.pet_type_id"
+        >
+          {{ petType.pet_type_name }}
+        </option>
+      </select>
     </div>
   </form>
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
-  name: 'PetAddForm'
+  name: 'PetAddForm',
+  data() {
+    return {
+      petTypes: []
+    }
+  },
+  methods: {
+    async getPetTypes() {
+      try {
+        const response = await axios.post('http://localhost/Petsola/controller/PetController.php', {
+          action: 'getPetTypes'
+        })
+
+        this.petTypes = response.data
+        // Log the error into the console
+      } catch (error) {
+        console.error('Error:', error)
+      }
+    }
+  },
+  mounted() {
+    this.getPetTypes()
+  }
 }
 </script>
 
@@ -38,14 +70,16 @@ div {
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  width: 300px;
+  width: 320px;
 }
 
 label {
   width: 100px;
 }
 
-input {
+input,
+select {
+  font-size: 16px;
   flex: 1;
   padding-inline: 10px;
   padding-block: 3.5px;
