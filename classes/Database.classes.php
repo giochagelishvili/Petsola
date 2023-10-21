@@ -6,7 +6,7 @@ class Database
     private string $password;
     private string $host;
     private string $db;
-    public $conn;
+    private $conn;
 
     public function __construct()
     {
@@ -24,9 +24,14 @@ class Database
         }
     }
 
-    public function fetchAll(string $table)
+    public function fetchAll(string $table, string $condition = '')
     {
         $sql = "SELECT * FROM $table";
+
+        if ($condition != '') {
+            $sql = "SELECT * FROM $table WHERE $condition";
+        }
+
         $stmt = $this->conn->prepare($sql);
 
         if (!$stmt->execute()) {

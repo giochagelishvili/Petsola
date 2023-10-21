@@ -2,7 +2,7 @@
   <h1>Pet Add</h1>
 
   <div>
-    <ButtonComponent text="Save" />
+    <ButtonComponent form="petAddForm" text="Save" />
     <RouterLink to="/">
       <ButtonComponent text="Cancel" />
     </RouterLink>

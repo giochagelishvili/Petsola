@@ -1,5 +1,5 @@
 <template>
-  <form id="petAddForm">
+  <form id="petAddForm" method="post" @submit.prevent="savePet">
     <div>
       <label for="petName">Pet Name</label>
       <input required type="text" name="petName" id="petName" />
@@ -14,13 +14,21 @@
     </div>
     <div>
       <label for="petType">Pet Type</label>
-      <select name="petType" id="petType">
+      <select name="petType" id="petType" @change="getPetBreeds">
         <option
           v-for="petType in petTypes"
           :value="petType.pet_type_name"
           :key="petType.pet_type_id"
         >
           {{ petType.pet_type_name }}
+        </option>
+      </select>
+    </div>
+    <div>
+      <label for="petBreed">Pet Breed</label>
+      <select name="petBreed" id="petBreed">
+        <option v-for="petBreed in petBreeds" :value="petBreed.breed" :key="petBreed.breed_id">
+          {{ petBreed.breed }}
         </option>
       </select>
     </div>
@@ -34,7 +42,9 @@ export default {
   name: 'PetAddForm',
   data() {
     return {
-      petTypes: []
+      petTypes: [],
+      petBreeds: [],
+      formData: []
     }
   },
   methods: {
@@ -45,6 +55,26 @@ export default {
         })
 
         this.petTypes = response.data
+        // Log the error into the console
+      } catch (error) {
+        console.error('Error:', error)
+      }
+    },
+    async savePet(event) {
+      this.formData.push(event.target.elements.petName.value)
+      this.formData.push(event.target.elements.petAge.value)
+      this.formData.push(event.target.elements.petWeight.value)
+      this.formData.push(event.target.elements.petType.value)
+      console.log(this.formData)
+    },
+    async getPetBreeds(event) {
+      const petType = event.target.value
+      try {
+        const response = await axios.post('http://localhost/Petsola/controller/PetController.php', {
+          action: 'getPetBreeds',
+          petType: petType
+        })
+        this.petBreeds = response.data
         // Log the error into the console
       } catch (error) {
         console.error('Error:', error)
