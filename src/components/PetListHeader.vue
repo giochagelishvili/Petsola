@@ -16,6 +16,7 @@ export default {
   components: { ButtonComponent },
   emits: ['deletePets'],
   methods: {
+    // Emit to "PetListView.vue" file
     deletePets() {
       this.$emit('deletePets')
     }

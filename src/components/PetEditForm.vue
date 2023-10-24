@@ -54,6 +54,8 @@ export default {
     }
   },
   methods: {
+    // Send post request to "PetController" to select everything from "pet_types" table
+    // Display results as <option> elements in "#petType" <select> element
     async getPetTypes() {
       try {
         const response = await axios.post('http://localhost/Petsola/controller/PetController.php', {
@@ -66,6 +68,8 @@ export default {
         console.error('Error:', error)
       }
     },
+    // Send post request to "PetController" to select everything from "pet_breeds" table
+    // Display results as <option> elements in "#petBreed" <select> element
     async getPetBreeds(event) {
       const petType = event.target.value
       try {
@@ -79,6 +83,8 @@ export default {
         console.error('Error:', error)
       }
     },
+    // Sends post request to "PetController", pass "#petEditForm" form data
+    // If pet data is successfully updated, redirect user to the main page
     async updatePet(event) {
       const formData = formToJSON(event.target)
 

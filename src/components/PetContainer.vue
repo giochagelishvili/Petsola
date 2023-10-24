@@ -20,6 +20,7 @@ export default {
   props: ['id', 'name', 'age', 'weight', 'type', 'breed'],
   emits: ['toggleCheckbox'],
   methods: {
+    // Emit to PetListView.vue file
     toggleCheckbox() {
       this.$emit('toggleCheckbox', this.id)
     }

@@ -38,6 +38,7 @@ if (isset($data["action"])) {
     }
 }
 
+// Updates "pets" table according to pet ID
 function updatePet(array $formData, string $petId)
 {
     $columnsToUpdate = [];
@@ -73,6 +74,7 @@ function updatePet(array $formData, string $petId)
     $db->update($columnsToUpdate, $values, $condition);
 }
 
+// Deletes pet(s) from "pets" table according to given pet IDs
 function deletePets(array $selectedPets)
 {
     $table = "pets";
@@ -95,6 +97,7 @@ function deletePets(array $selectedPets)
     }
 }
 
+// Selects all from "pets" table and returns the result to "PetListView" file
 function getAllPets()
 {
     $db = new Database();
@@ -102,6 +105,8 @@ function getAllPets()
     echo json_encode($pets);
 }
 
+// Validates form data and saves pet into "pets" table
+// In case of invalid form data errors are returned to "PetAddForm" component
 function savePet(array $formData)
 {
     $errors = [];
@@ -146,6 +151,7 @@ function savePet(array $formData)
     $db->insert($table, $values);
 }
 
+// Selects all from "pet_types" table and returns result to "PetAddForm" / "PetEditForm" component(s)
 function getPetTypes()
 {
     $db = new Database();
@@ -153,6 +159,7 @@ function getPetTypes()
     echo json_encode($petTypes);
 }
 
+// Selects all from "pet_breeds" table and returns result to "PetAddForm" / "PetEditForm" component(s)
 function getPetBreeds(string $petType)
 {
     $db = new Database();
@@ -162,6 +169,7 @@ function getPetBreeds(string $petType)
     echo json_encode($petBreeds);
 }
 
+// Decodes received data
 function decodeData()
 {
     $postData = file_get_contents("php://input");

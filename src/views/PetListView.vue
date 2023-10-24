@@ -32,6 +32,8 @@ export default {
     }
   },
   methods: {
+    // Select all from "pets" table and display information on the main page
+    // Particularly in "PetContainer" component
     async getAllPets() {
       try {
         const response = await axios.post('http://localhost/Petsola/controller/PetController.php', {
@@ -43,6 +45,8 @@ export default {
         console.error('Error:', error)
       }
     },
+    // Send post request to "PetController", pass selected pets ids
+    // Refresh the page if pets were successfully deleted from the database
     async deletePets() {
       try {
         const response = await axios.post('http://localhost/Petsola/controller/PetController.php', {
@@ -58,6 +62,8 @@ export default {
         console.error('Error:', error)
       }
     },
+    // Add pet ID to selectedPets array
+    // Delete pet ID from selectedPets array if it already exists in it
     updateSelectedArray(pet_id) {
       if (this.selectedPets.includes(pet_id)) {
         // Delete pet_id if it already exists in the array

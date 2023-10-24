@@ -4,6 +4,8 @@ class Validator
 {
     private array $errors = [];
 
+    // Returns true if all the data is valid
+    // Else returns errors array
     public function validateForm(string $petName, int $petAge, int $petWeight, string $petType, string $petBreed)
     {
         if ($this->validateName($petName) != true) {
@@ -26,6 +28,8 @@ class Validator
             array_push($this->errors, "Invalid breed.");
         }
 
+        // Return true if there are no errors
+        // Else return errors array
         if (!empty($this->errors)) {
             echo json_encode($this->errors);
         } else {
@@ -33,6 +37,8 @@ class Validator
         }
     }
 
+    // Checks if passed pet breed exists in the database
+    // Returns true if breed exists / else returns false
     private function validateBreed(string $petBreed)
     {
         $table = "pet_breeds";
@@ -52,6 +58,8 @@ class Validator
         }
     }
 
+    // Checks if passed pet type exists in the database
+    // Returns true if type exists / else returns false
     private function validateType(string $petType)
     {
         $table = "pet_types";
@@ -71,6 +79,8 @@ class Validator
         }
     }
 
+    // Returns true if passed weight is greater than 0 and less than 100
+    // Else returns false
     private function validateWeight(int $petWeight)
     {
         if ($petWeight > 0 && $petWeight < 100) {
@@ -80,6 +90,8 @@ class Validator
         }
     }
 
+    // Returns true if passed age is greater than 0 and less than 80
+    // Else returns false
     private function validateAge(int $petAge)
     {
         if ($petAge > 0 && $petAge < 80) {
@@ -89,6 +101,8 @@ class Validator
         }
     }
 
+    // Returns true if passed name contains only letters and is less than 20 characters long
+    // Else returns false
     private function validateName(string $petName)
     {
         if (ctype_alpha($petName) === true && strlen($petName) < 20) {
