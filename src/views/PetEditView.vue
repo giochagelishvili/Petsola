@@ -2,14 +2,18 @@
   <header>
     <PetEditHeader />
   </header>
-  <main></main>
+  <main>
+    <PetEditForm />
+  </main>
 </template>
 
 <script>
 import PetEditHeader from '../components/PetEditHeader.vue'
+import PetEditForm from '../components/PetEditForm.vue'
+
 export default {
   name: 'PetEditVue',
-  components: { PetEditHeader },
+  components: { PetEditHeader, PetEditForm },
   data() {
     return {
       petId: this.$route.query.id

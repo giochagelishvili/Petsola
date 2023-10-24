@@ -31,6 +31,7 @@ if (isset($data["action"])) {
             if (isset($data['selectedPets']))
                 deletePets($data['selectedPets']);
             break;
+        case "updatePet":
     }
 }
 

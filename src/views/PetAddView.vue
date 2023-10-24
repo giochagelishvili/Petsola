@@ -16,9 +16,3 @@ export default {
   components: { PetAddHeader, PetAddForm }
 }
 </script>
-
-<style scoped>
-main {
-  padding: 20px;
-}
-</style>
