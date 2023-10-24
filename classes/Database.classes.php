@@ -24,7 +24,7 @@ class Database
         }
     }
 
-    public function fetchAll(string $table, string $condition = '')
+    public function fetch(string $table, string $condition = '')
     {
         $sql = "SELECT * FROM $table";
 

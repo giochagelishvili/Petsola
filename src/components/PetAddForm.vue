@@ -35,15 +35,14 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios, { formToJSON } from 'axios'
 
 export default {
   name: 'PetAddForm',
   data() {
     return {
       petTypes: [],
-      petBreeds: [],
-      formData: []
+      petBreeds: []
     }
   },
   methods: {
@@ -73,17 +72,18 @@ export default {
       }
     },
     async savePet(event) {
-      this.formData = []
-      this.formData.push(event.target.elements.petName.value)
-      this.formData.push(event.target.elements.petAge.value)
-      this.formData.push(event.target.elements.petWeight.value)
-      this.formData.push(event.target.elements.petType.value)
-      this.formData.push(event.target.elements.petBreed.value)
+      const formData = formToJSON(event.target)
+      // this.formData = []
+      // this.formData.push(event.target.elements.petName.value)
+      // this.formData.push(event.target.elements.petAge.value)
+      // this.formData.push(event.target.elements.petWeight.value)
+      // this.formData.push(event.target.elements.petType.value)
+      // this.formData.push(event.target.elements.petBreed.value)
 
       try {
         const response = await axios.post('http://localhost/Petsola/controller/PetController.php', {
           action: 'savePet',
-          formData: this.formData
+          formData: formData
         })
 
         console.log(response.data)

@@ -31,13 +31,33 @@ if (isset($data["action"])) {
 
 function savePet(array $formData)
 {
+    $errors = [];
+
+    if (
+        !isset($formData['petName']) || $formData['petName'] == '' ||
+        !isset($formData['petAge']) || $formData['petAge'] == '' ||
+        !isset($formData['petWeight']) || $formData['petWeight'] == '' ||
+        !isset($formData['petType']) || $formData['petType'] == '' ||
+        !isset($formData['petBreed']) || $formData['petBreed'] == ''
+    ) {
+        array_push($errors, "Please fill out every field!");
+        echo json_encode($errors);
+        exit();
+    }
+
+    $petName = $formData['petName'];
+    $petAge = $formData['petAge'];
+    $petWeight = $formData['petWeight'];
+    $petType = $formData['petType'];
+    $petBreed = $formData['petBreed'];
+
     print_r($formData);
 }
 
 function getPetTypes()
 {
     $db = new Database();
-    $petTypes = $db->fetchAll("pet_types");
+    $petTypes = $db->fetch("pet_types");
     echo json_encode($petTypes);
 }
 
@@ -46,7 +66,7 @@ function getPetBreeds(string $petType)
     $db = new Database();
     $table = "pet_breeds";
     $condition = "animal = '$petType'";
-    $petBreeds = $db->fetchAll($table, $condition);
+    $petBreeds = $db->fetch($table, $condition);
     echo json_encode($petBreeds);
 }
 
