@@ -45,13 +45,20 @@ function savePet(array $formData)
         exit();
     }
 
+    if (!is_numeric($formData['petAge']) || !is_numeric($formData['petWeight'])) {
+        array_push($errors, "Please provide data of indicated type!");
+        echo json_encode($errors);
+        exit();
+    }
+
     $petName = $formData['petName'];
     $petAge = $formData['petAge'];
     $petWeight = $formData['petWeight'];
     $petType = $formData['petType'];
     $petBreed = $formData['petBreed'];
 
-    print_r($formData);
+    $validator = new Validator();
+    $validation = $validator->validateForm($petName, $petAge, $petWeight, $petType, $petBreed);
 }
 
 function getPetTypes()

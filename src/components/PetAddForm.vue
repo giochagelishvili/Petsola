@@ -28,7 +28,9 @@
     <div v-if="petBreeds.length != 0">
       <label for="petBreed">Pet Breed</label>
       <select required name="petBreed" id="petBreed">
-        <option v-for="petBreed in petBreeds" :key="petBreed.breed_id">{{ petBreed.breed }}</option>
+        <option v-for="petBreed in petBreeds" :key="petBreed.breed_id" :value="petBreed.breed">
+          {{ petBreed.breed }}
+        </option>
       </select>
     </div>
   </form>
