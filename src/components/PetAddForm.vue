@@ -87,7 +87,11 @@ export default {
           formData: formData
         })
 
-        this.errors = response.data
+        if (response.data) {
+          this.errors = response.data
+        } else {
+          this.$router.push('/')
+        }
         // Log the error into the console
       } catch (error) {
         console.error('Error:', error)

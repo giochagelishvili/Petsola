@@ -64,6 +64,13 @@ function savePet(array $formData)
         echo $validation;
         exit();
     }
+
+    $db = new Database();
+
+    $table = "pets(pet_name, pet_age, pet_weight, pet_type, pet_breed)";
+    $values = [$petName, $petAge, $petWeight, $petType, $petBreed];
+
+    $db->insert($table, $values);
 }
 
 function getPetTypes()
