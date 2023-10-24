@@ -17,16 +17,24 @@ if (isset($data["action"])) {
             getPetTypes();
             break;
         case "getPetBreeds":
-            if (isset($data['petType'])) {
+            if (isset($data['petType']))
                 getPetBreeds($data['petType']);
-            }
             break;
         case "savePet":
-            if (isset($data['formData'])) {
+            if (isset($data['formData']))
                 savePet($data['formData']);
-            }
+            break;
+        case "getAllPets":
+            getAllPets();
             break;
     }
+}
+
+function getAllPets()
+{
+    $db = new Database();
+    $pets = $db->fetch("pets");
+    echo json_encode($pets);
 }
 
 function savePet(array $formData)
