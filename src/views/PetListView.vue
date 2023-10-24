@@ -1,6 +1,6 @@
 <template>
   <header>
-    <PetListHeader />
+    <PetListHeader @deletePets="deletePets" />
   </header>
   <main>
     <PetContainer
@@ -12,6 +12,7 @@
       :weight="pet.pet_weight"
       :type="pet.pet_type"
       :breed="pet.pet_breed"
+      @toggleCheckbox="updateSelectedArray"
     />
   </main>
 </template>
@@ -26,7 +27,8 @@ export default {
   components: { PetListHeader, PetContainer },
   data() {
     return {
-      pets: []
+      pets: [],
+      selectedPets: []
     }
   },
   methods: {
@@ -35,12 +37,37 @@ export default {
         const response = await axios.post('http://localhost/Petsola/controller/PetController.php', {
           action: 'getAllPets'
         })
-
         this.pets = response.data
-        console.log(this.pets)
         // Log the error into the console
       } catch (error) {
         console.error('Error:', error)
+      }
+    },
+    async deletePets() {
+      try {
+        const response = await axios.post('http://localhost/Petsola/controller/PetController.php', {
+          action: 'deletePets',
+          selectedPets: this.selectedPets
+        })
+
+        if (response.data === true) {
+          this.$router.go()
+        }
+        // Log the error into the console
+      } catch (error) {
+        console.error('Error:', error)
+      }
+    },
+    updateSelectedArray(pet_id) {
+      if (this.selectedPets.includes(pet_id)) {
+        // Delete pet_id if it already exists in the array
+        const index = this.selectedPets.indexOf(pet_id)
+        if (index !== -1) {
+          this.selectedPets.splice(index, 1)
+        }
+        // Else add pet_id to the array
+      } else {
+        this.selectedPets.push(pet_id)
       }
     }
   },

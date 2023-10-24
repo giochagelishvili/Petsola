@@ -1,6 +1,6 @@
 <template>
   <div>
-    <input type="checkbox" name="pet_id" :value="id" />
+    <input type="checkbox" name="pet_id" :value="id" @click="toggleCheckbox" />
     <h2>Name: {{ name }}</h2>
     <h2>Age: {{ age }}</h2>
     <h2>Weight: {{ weight }}(KG)</h2>
@@ -12,7 +12,13 @@
 <script>
 export default {
   name: 'PetContainer',
-  props: ['id', 'name', 'age', 'weight', 'type', 'breed']
+  props: ['id', 'name', 'age', 'weight', 'type', 'breed'],
+  emits: ['toggleCheckbox'],
+  methods: {
+    toggleCheckbox() {
+      this.$emit('toggleCheckbox', this.id)
+    }
+  }
 }
 </script>
 

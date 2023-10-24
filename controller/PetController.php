@@ -27,6 +27,32 @@ if (isset($data["action"])) {
         case "getAllPets":
             getAllPets();
             break;
+        case "deletePets":
+            if (isset($data['selectedPets']))
+                deletePets($data['selectedPets']);
+            break;
+    }
+}
+
+function deletePets(array $selectedPets)
+{
+    $table = "pets";
+    $condition = "pet_id = '$selectedPets[0]'";
+
+    if (sizeof($selectedPets) > 1) {
+        $condition = "pet_id IN ('$selectedPets[0]'";
+
+        for ($i = 1; $i <= sizeof($selectedPets) - 1; $i++) {
+            $condition = $condition . ", '$selectedPets[$i]'";
+        }
+
+        $condition = $condition . ");";
+    }
+
+    $db = new Database();
+
+    if ($db->delete($table, $condition) === true) {
+        echo json_encode(true);
     }
 }
 

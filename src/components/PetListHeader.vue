@@ -5,7 +5,7 @@
     <RouterLink to="petadd">
       <ButtonComponent text="Add" />
     </RouterLink>
-    <ButtonComponent text="Delete" />
+    <ButtonComponent text="Delete" @click="deletePets" />
   </div>
 </template>
 
@@ -13,7 +13,13 @@
 import ButtonComponent from './ButtonComponent.vue'
 export default {
   name: 'PetListHeader',
-  components: { ButtonComponent }
+  components: { ButtonComponent },
+  emits: ['deletePets'],
+  methods: {
+    deletePets() {
+      this.$emit('deletePets')
+    }
+  }
 }
 </script>
 

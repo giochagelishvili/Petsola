@@ -59,4 +59,23 @@ class Database
             exit();
         }
     }
+
+    public function delete(string $table, string $condition = '')
+    {
+        $sql = "DELETE FROM $table";
+
+        if ($condition != '') {
+            $sql = "DELETE FROM $table WHERE $condition";
+        }
+
+        $stmt = $this->conn->prepare($sql);
+
+        if (!$stmt->execute()) {
+            $this->conn = null;
+            $stmt = null;
+            exit();
+        }
+
+        return true;
+    }
 }
