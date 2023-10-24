@@ -1,9 +1,20 @@
 <template>
-  <h1>Pet Edit View</h1>
+  <header>
+    <PetEditHeader />
+  </header>
+  <main></main>
 </template>
 
 <script>
+import PetEditHeader from '../components/PetEditHeader.vue'
 export default {
-  name: 'PetEditVue'
+  name: 'PetEditVue',
+  components: { PetEditHeader },
+  data() {
+    return {
+      petId: this.$route.query.id
+    }
+  },
+  methods: {}
 }
 </script>
