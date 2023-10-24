@@ -6,6 +6,7 @@
     <PetContainer
       v-for="pet in pets"
       :key="pet.pet_id"
+      :id="pet.pet_id"
       :name="pet.pet_name"
       :age="pet.pet_age"
       :weight="pet.pet_weight"
