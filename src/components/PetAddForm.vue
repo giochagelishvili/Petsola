@@ -34,6 +34,11 @@
       </select>
     </div>
   </form>
+  <ul v-if="errors.length > 0">
+    <li v-for="error in errors" :key="error">
+      {{ error }}
+    </li>
+  </ul>
 </template>
 
 <script>
@@ -44,7 +49,8 @@ export default {
   data() {
     return {
       petTypes: [],
-      petBreeds: []
+      petBreeds: [],
+      errors: []
     }
   },
   methods: {
@@ -75,20 +81,13 @@ export default {
     },
     async savePet(event) {
       const formData = formToJSON(event.target)
-      // this.formData = []
-      // this.formData.push(event.target.elements.petName.value)
-      // this.formData.push(event.target.elements.petAge.value)
-      // this.formData.push(event.target.elements.petWeight.value)
-      // this.formData.push(event.target.elements.petType.value)
-      // this.formData.push(event.target.elements.petBreed.value)
-
       try {
         const response = await axios.post('http://localhost/Petsola/controller/PetController.php', {
           action: 'savePet',
           formData: formData
         })
 
-        console.log(response.data)
+        this.errors = response.data
         // Log the error into the console
       } catch (error) {
         console.error('Error:', error)
@@ -127,5 +126,19 @@ select {
   flex: 1;
   padding-inline: 10px;
   padding-block: 3.5px;
+}
+
+ul {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 320px;
+
+  padding: 30px;
+  margin-top: 20px;
+
+  border: 1px solid red;
+  border-radius: 5px;
+  color: red;
 }
 </style>

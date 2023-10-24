@@ -24,7 +24,12 @@ class Validator
 
         if ($this->validateBreed($petBreed) != true) {
             array_push($this->errors, "Invalid breed.");
-            print_r($this->errors);
+        }
+
+        if (!empty($this->errors)) {
+            echo json_encode($this->errors);
+        } else {
+            return true;
         }
     }
 

@@ -59,6 +59,11 @@ function savePet(array $formData)
 
     $validator = new Validator();
     $validation = $validator->validateForm($petName, $petAge, $petWeight, $petType, $petBreed);
+
+    if ($validation != true) {
+        echo $validation;
+        exit();
+    }
 }
 
 function getPetTypes()
