@@ -42,4 +42,21 @@ class Database
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
+
+    public function insert(string $table, array $values)
+    {
+        $sql = "INSERT INTO $table VALUES (";
+        for ($i = 0; $i < sizeof($values) - 1; $i++) {
+            $sql = $sql . "?, ";
+        }
+        $sql = $sql . "?);";
+
+        $stmt = $this->conn->prepare($sql);
+
+        if (!$stmt->execute($values)) {
+            $this->conn = null;
+            $stmt = null;
+            exit();
+        }
+    }
 }
