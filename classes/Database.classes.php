@@ -10,10 +10,10 @@ class Database
 
     public function __construct()
     {
-        $this->username = "root";
-        $this->password = "";
-        $this->host = "localhost";
-        $this->db = "petsola";
+        $this->username = "yourusername";
+        $this->password = "yourpassword";
+        $this->host = "yourhost";
+        $this->db = "yourdatabase";
 
         try {
             $this->conn = new PDO("mysql:host=$this->host;dbname=$this->db", $this->username, $this->password);
