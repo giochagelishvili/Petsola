@@ -32,7 +32,45 @@ if (isset($data["action"])) {
                 deletePets($data['selectedPets']);
             break;
         case "updatePet":
+            if (isset($data['formData']) && isset($data['petId']))
+                updatePet($data['formData'], $data['petId']);
+            break;
     }
+}
+
+function updatePet(array $formData, string $petId)
+{
+    $columnsToUpdate = [];
+    $values = [];
+    $condition = "pet_id = '$petId'";
+
+    if (isset($formData['petName']) && $formData['petName'] != '') {
+        array_push($columnsToUpdate, "pet_name");
+        array_push($values, $formData['petName']);
+    }
+
+    if (isset($formData['petAge']) && $formData['petAge'] != '') {
+        array_push($columnsToUpdate, "pet_age");
+        array_push($values, $formData['petAge']);
+    }
+
+    if (isset($formData['petWeight']) && $formData['petWeight'] != '') {
+        array_push($columnsToUpdate, "pet_weight");
+        array_push($values, $formData['petWeight']);
+    }
+
+    if (isset($formData['petType']) && $formData['petType'] != '') {
+        array_push($columnsToUpdate, "pet_type");
+        array_push($values, $formData['petType']);
+    }
+
+    if (isset($formData['petBreed']) && $formData['petBreed'] != '') {
+        array_push($columnsToUpdate, "pet_breed");
+        array_push($values, $formData['petBreed']);
+    }
+
+    $db = new Database();
+    $db->update($columnsToUpdate, $values, $condition);
 }
 
 function deletePets(array $selectedPets)

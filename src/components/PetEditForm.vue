@@ -41,6 +41,11 @@ import axios, { formToJSON } from 'axios'
 
 export default {
   name: 'PetAddForm',
+  props: {
+    petId: {
+      type: String
+    }
+  },
   data() {
     return {
       petTypes: [],
@@ -80,12 +85,11 @@ export default {
       try {
         const response = await axios.post('http://localhost/Petsola/controller/PetController.php', {
           action: 'updatePet',
-          formData: formData
+          formData: formData,
+          petId: this.petId
         })
 
-        if (response.data) {
-          this.errors = response.data
-        } else {
+        if (!response.data) {
           this.$router.push('/')
         }
         // Log the error into the console

@@ -78,4 +78,29 @@ class Database
 
         return true;
     }
+
+    public function update(array $columnsToUpdate, array $values, string $condition = '')
+    {
+        $sql = "UPDATE pets SET ";
+
+        for ($i = 0; $i < sizeof($columnsToUpdate); $i++) {
+            $sql = $sql . "$columnsToUpdate[$i] = '$values[$i]'";
+            if ($i != sizeof($columnsToUpdate) - 1) {
+                $sql = $sql . ", ";
+            }
+        }
+
+        if ($condition != '') {
+            $sql = $sql . " WHERE $condition;";
+        }
+
+        $stmt = $this->conn->prepare($sql);
+
+        if (!$stmt->execute()) {
+            $this->conn = null;
+            $stmt = null;
+            echo "Couldn't update pet.";
+            exit();
+        }
+    }
 }

@@ -3,7 +3,7 @@
     <PetEditHeader />
   </header>
   <main>
-    <PetEditForm />
+    <PetEditForm :petId="petId" />
   </main>
 </template>
 
