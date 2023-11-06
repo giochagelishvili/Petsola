@@ -18,5 +18,5 @@ Simple pet listing web application where user can see, add, update and delete pe
 
 <ul>
 <li>The project is hosted at <a href="https://www.000webhost.com/">www.000webhost.com</a> hosting.</li>
-<li>Application can be accessed using the following URL: <a href="https://petsola.000webhostapp.com/">https://petsola.000webhostapp.com/</a></li>
+<li>Application can be accessed using the following URL: <a href="https://petsolla.000webhostapp.com/">https://petsolla.000webhostapp.com/</a></li>
 <ul>
